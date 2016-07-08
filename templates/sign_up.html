@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
-    <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='sign_up.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='signup.css') }}">
 </head>
 <body>
 <div id="container">
     <div class="control-group" id="container-form">
         <form action="/signup" method="POST" class="form-horizontal" style="text-align: center;">
             <div id="row">
-                <div id="row-heading">Know your credit card</div>
+                <div id="row-heading">Know your Credit Card</div>
             </div>
             <div class="control-group">
                 <div class="controls">
@@ -29,13 +29,15 @@
                 </div>
             </div>
             {% for result in results %}
-            <label> Q.{{ result[0] }}</label>
-            <label>{{ result[1] }}</label>
-            <div>
+            <div class="question">
+                <label> Q.{{ result[0] }}</label>
+                <label>{{ result[1] }}</label>
+            </div>
+            <div class="checkbox">
                 <label>
-                <input type="checkbox" id=yes_{{ result[0] }} value={{ result[0] }}_yes name= question_{{ result[0] }} questionNo = {{ result[0] }}>Yes</label>
+                <input type="checkbox" class= "mycheckbox" id=yes_{{ result[0] }} value={{ result[0] }}_yes name= question_{{ result[0] }} questionNo = {{ result[0] }}>Yes</label>
                 <label>
-                <input type="checkbox" id=no_{{ result[0] }} value={{ result[0] }}_no name= question_{{ result[0] }} >No</label>
+                <input type="checkbox" class="mycheckbox" id=no_{{ result[0] }} value={{ result[0] }}_no name= question_{{ result[0] }} >No</label>
             </div>
             {% endfor %}
 

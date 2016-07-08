@@ -26,6 +26,8 @@ def load_questions():
         query = "SELECT * FROM question_table "
         cursor.execute(query)
         results = cursor.fetchall()
+        conn.commit()
+        conn.close()
         return render_template('sign_up.html',results=results)
 
     except Exception as e:
@@ -59,7 +61,6 @@ def signUp():
             cursor = conn.cursor()
 
             insert_query_for_user = "INSERT INTO user(email_id,username,password) VALUES(%s,%s,%s)"
-            print insert_query_for_user
             cursor.execute(insert_query_for_user,(_email,_username,password_hash))
             conn.commit()
 
@@ -70,6 +71,7 @@ def signUp():
 
             # storing user_id in session
             session['uid'] = user_id
+            session['user_response'] = user_response_for_yes_answers
 
             # inserting question numbers into user prefernce table
 
@@ -79,7 +81,7 @@ def signUp():
                 conn.commit()
             conn.close()
 
-            return redirect(url_for('home',answers_list = user_response_for_yes_answers,uid=user_id))
+            return redirect(url_for('home'))
 
         except Exception as e:
                 print "error :",e
@@ -88,17 +90,23 @@ def signUp():
     else:
         return render_template('signup.html')
 
-@app.route('/home/<uid>')
-def home(answers_list):
+@app.route('/home')
+def home():
     try:
+        user_response = session['user_response']         # user reponse is a list containing answers
+        print user_response
         conn = mysql.connect()
         cursor = conn.cursor()
-        answers_set = set(answers_list)
-        query = "SELECT COUNT(Points) FROM questions_for_credit_cards WHERE QuesNo in %s ORDER BY DESC"
-        cursor.execute(query,answers_set)
+        answers_tuple = tuple(user_response)                 # converting user response into tuple
+        print answers_tuple
+        query = "SELECT cc.card_name ,COUNT(qc.Points) FROM questions_for_credit_cards AS qc INNER JOIN credit_card AS cc WHERE QuesNo in " + str(answers_tuple)
+        print query
+        cursor.execute(query)
         results = cursor.fetchall()
+        conn.commit()
+        conn.close()
         print results
-#        return render_template('sign_up.html',results=results)
+        return render_template('home.html',results=results)
 
     except Exception as e:
         print "Error :",e
