@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='sign_up.css') }}">
+</head>
+<body>
+<div id="container">
+    <div class="control-group" id="container-form">
+        <form action="/signup" method="POST" class="form-horizontal" style="text-align: center;">
+            <div id="row">
+                <div id="row-heading">Know your credit card</div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input type="text" id="username" name="username" class="input-xlarge" placeholder="Enter Username" required/>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input type="email" id="email" name="email" class="input-xlarge" placeholder="Enter Email" onblur="validateEmail(this)" required/>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="controls">
+                    <input type="password" id="password" name="password" class="input-xlarge" placeholder="Enter Password" required/>
+                </div>
+            </div>
+            {% for result in results %}
+            <label> Q.{{ result[0] }}</label>
+            <label>{{ result[1] }}</label>
+            <div>
+                <label>
+                <input type="checkbox" id=yes_{{ result[0] }} value={{ result[0] }}_yes name= question_{{ result[0] }} questionNo = {{ result[0] }}>Yes</label>
+                <label>
+                <input type="checkbox" id=no_{{ result[0] }} value={{ result[0] }}_no name= question_{{ result[0] }} >No</label>
+            </div>
+            {% endfor %}
+
+            <div class="control-group" id="submit-box">
+                <div class="controls">
+                    <button id="submit" type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
