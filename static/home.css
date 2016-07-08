@@ -1,0 +1,39 @@
+@media screen and (max-width: 2500px){
+
+.container {
+    background-color: #585555;
+    width:100%;
+    margin: 0 auto;
+    }
+
+.header{
+    color: white;
+    text-align: center;
+    padding: 2%;
+    font-size: 28px;
+    font-family: sans-serif;
+    background-color: #BC7467;
+}
+
+.inner_container{
+    text-align: center;
+    color: white;
+    font-size: 22px;
+    font-family: sans-serif;
+    border-bottom: solid 2px;
+    border-color: tomato;
+}
+
+.card_ranking{
+   display: inline-flex;
+   width: 100%;
+   border-bottom: solid 2px;
+   border-color: tomato;
+   padding-bottom: 1%;
+   padding-top: 1%;
+       }
+
+.card_name{
+    padding-left: 10%;
+    }
+}

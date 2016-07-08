@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='home.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">Most suitable Credit Cards for you in decreasing order of there ranking.</div>
+        <div class="inner_container">
+            {% for result in results %}
+            <div class="card_ranking" >
+                <div class="card_name">{{ result[0] }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>

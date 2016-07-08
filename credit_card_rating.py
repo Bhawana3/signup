@@ -93,19 +93,15 @@ def signUp():
 @app.route('/home')
 def home():
     try:
-        user_response = session['user_response']         # user reponse is a list containing answers
-        print user_response
+        user_response = session['user_response']                # user reponse is a list containing answers
         conn = mysql.connect()
         cursor = conn.cursor()
         answers_tuple = tuple(user_response)                 # converting user response into tuple
-        print answers_tuple
-        query = "SELECT cc.card_name ,COUNT(qc.Points) FROM questions_for_credit_cards AS qc INNER JOIN credit_card AS cc WHERE QuesNo in " + str(answers_tuple)
-        print query
+        query = "SELECT cc.card_name ,Sum(qc.Points) AS sum,cc.CId FROM questions_for_credit_cards AS qc INNER JOIN credit_card AS cc ON cc.CID = qc.CardNo WHERE QuesNo in " + str(answers_tuple) + "GROUP BY cc.CId,cc.card_name ORDER BY sum DESC;"
         cursor.execute(query)
         results = cursor.fetchall()
         conn.commit()
         conn.close()
-        print results
         return render_template('home.html',results=results)
 
     except Exception as e:

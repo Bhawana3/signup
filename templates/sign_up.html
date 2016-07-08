@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Sign Up</title>
     <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='signup.css') }}">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 </head>
 <body>
 <div id="container">
@@ -19,7 +20,7 @@
             </div>
             <div class="control-group">
                 <div class="controls">
-                    <input type="email" id="email" name="email" class="input-xlarge" placeholder="Enter Email" onblur="validateEmail(this)" required/>
+                    <input type="email" id="email" name="email" class="input-xlarge" placeholder="Enter Email" required/>
                 </div>
             </div>
 
