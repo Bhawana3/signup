@@ -14,12 +14,14 @@
     }
 
 #row-heading{
-     padding-top:20px;
-     padding-bottom:5px;
+     padding-top:1.5% ;
      color: white;
      font-size: 37px;
      font-family: sans-serif;
      margin-top: 10px;
+     background-color: #B84A36;
+     padding-bottom: 1.5%;
+     text-align: center;
     }
 
 #row-detail{
@@ -70,25 +72,26 @@ button {
     padding-left: 5px;
 }
 
+.flashes{
+    color:red;
+    font-family: cursive;
+    font-size: 18px;
+    padding-top:5px;
+    }
+
 .question{
     font-size: 25px;
     color: white;
     margin-top: 3%;
+    font-family: cursive;
     }
 
 .checkbox{
     font-size: 25px;
     color: white;
     margin-top: 1%;
+    font-family: cursive;
     }
-
-.flashes{
-    color:red;
-    font-family: monospace;
-    font-size: 14px;
-    padding-top:5px;
-    }
-
 
 #submit-box {
     padding-bottom:20px;

@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <title>Sign Up</title>
     <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='signup.css') }}">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 </head>
 <body>
 <div id="container">
     <div class="control-group" id="container-form">
+        <div id="row" >
+            <div id="row-heading">Know best suited credit card for you</div>
+        </div>
         <form action="/signup" method="POST" class="form-horizontal" style="text-align: center;">
-            <div id="row">
-                <div id="row-heading">Know your Credit Card</div>
-            </div>
             <div class="control-group">
                 <div class="controls">
                     <input type="text" id="username" name="username" class="input-xlarge" placeholder="Enter Username" required/>
@@ -29,18 +28,30 @@
                     <input type="password" id="password" name="password" class="input-xlarge" placeholder="Enter Password" required/>
                 </div>
             </div>
-            {% for result in results %}
-            <div class="question">
-                <label> Q.{{ result[0] }}</label>
-                <label>{{ result[1] }}</label>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class=flashes>
+                {% for message in messages %}
+                <div>{{ message }}</div>
+                {% endfor %}
             </div>
-            <div class="checkbox">
-                <label>
-                <input type="checkbox" class= "mycheckbox" id=yes_{{ result[0] }} value={{ result[0] }}_yes name= question_{{ result[0] }} >Yes</label>
-                <label>
-                <input type="checkbox" class="mycheckbox" id=no_{{ result[0] }} value={{ result[0] }}_no name= question_{{ result[0] }} >No</label>
+            {% endif %}
+            {% endwith %}
+
+            <div class="question-box" style="text-align: left;margin-left: 20%;">
+                {% for result in results %}
+                <div class="question">
+                    <label> Q.{{ result[0] }}</label>
+                    <label>{{ result[1] }}</label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                    <input type="radio" class= "mycheckbox" id=yes_{{ result[0] }} value={{ result[0] }}_yes name= question_{{ result[0] }} >Yes</label>
+                    <label>
+                    <input type="radio" class="mycheckbox" id=no_{{ result[0] }} value={{ result[0] }}_no name= question_{{ result[0] }} >No</label>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
 
             <div class="control-group" id="submit-box">
                 <div class="controls">

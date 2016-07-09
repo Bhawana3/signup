@@ -1,5 +1,5 @@
 import flask
-from flask import Flask,redirect,render_template,request,url_for,session
+from flask import Flask,redirect,render_template,request,url_for,session,flash
 from flask.ext.mysql import MySQL
 from passlib.hash import sha256_crypt
 
@@ -85,9 +85,11 @@ def signUp():
 
         except Exception as e:
                 print "error :",e
+                flash("email already exists!!")
                 return redirect(url_for('load_questions'))
 
     else:
+        flash("email already exists!!")
         return render_template('signup.html')
 
 @app.route('/home')
