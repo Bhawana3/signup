@@ -37,14 +37,14 @@ def load_questions():
 @app.route('/signup',methods=['POST'])
 def signUp():
     if request.method == 'POST':
-        _username = request.form['username']
-        _email = request.form['email']
-        _password = request.form['password']
+        _username = request.form.get('username',None)
+        _email = request.form.get('email',None)
+        _password = request.form.get('password',None)
 
         answers_for_questions = []                                          # for storing user response to following questions
         for number in range(1,6):
             question = 'question_' + str(number)
-            answers_for_questions.append(str(request.form[question]))       # finds value for particular name attribute
+            answers_for_questions.append(str(request.form.get(question,None)))       # finds value for particular name attribute
 
         user_response_for_yes_answers = []                                  #stores question number for user response with yes
         for answer in answers_for_questions:
