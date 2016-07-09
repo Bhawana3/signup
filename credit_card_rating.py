@@ -97,7 +97,7 @@ def home():
         conn = mysql.connect()
         cursor = conn.cursor()
         answers_tuple = tuple(user_response)                 # converting user response into tuple
-        query = "SELECT cc.card_name ,Sum(qc.Points) AS sum,cc.CId FROM questions_for_credit_cards AS qc INNER JOIN credit_card AS cc ON cc.CID = qc.CardNo WHERE QuesNo in " + str(answers_tuple) + "GROUP BY cc.CId,cc.card_name ORDER BY sum DESC;"
+        query = "SELECT cc.card_name ,Sum(qc.Points) AS sum FROM questions_for_credit_cards AS qc INNER JOIN credit_card AS cc ON cc.CID = qc.CardNo WHERE QuesNo in " + str(answers_tuple) + "GROUP BY cc.CId,cc.card_name ORDER BY sum DESC;"
         cursor.execute(query)
         results = cursor.fetchall()
         conn.commit()
