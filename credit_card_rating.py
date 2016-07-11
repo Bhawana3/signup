@@ -108,7 +108,7 @@ def login():
             print "Error occurred:",e
 
     elif request.method == 'POST':
-        if 'uid' in session:
+        if ('uid' in session) and ('user_response' in session):
             print "User:",session['uid']," is already logged in. Redirecting to home page"
             return redirect(url_for('home'))
         else:
@@ -144,9 +144,9 @@ def login():
                         try:
                             conn = mysql.connect()
                             cursor = conn.cursor()
-                            sql_query_for_user_preference = "SELECT * FROM user_preference WHERE user_id = %s" % str(uid)
+                            sql_query_for_user_preference = "SELECT QuesNo FROM user_preference WHERE user_id = %s" % str(uid)
                             cursor.execute(sql_query_for_user_preference)
-                            user_preference = cursor.fetchall()
+                            user_preference = [row[0] for row in cursor.fetchall()]
                             conn.commit()
                             conn.close()
                             print user_preference
@@ -189,6 +189,7 @@ def home():
 
     except Exception as e:
         print "Error :",e
+        return redirect(url_for('login'))
 
 @app.route('/logout',methods=['GET'])
 def logout():
