@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logout</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='logout.css') }}">
+</head>
+<body>
+<div id="container">
+    <div class="header">
+        <div class="nav-collapse collapse">
+            <ul class="nav">
+                <li ><a href="{{ url_for('signUp') }}">Sign Up</a></li>
+                <li class="active"><a href="{{ url_for('login') }}">Login</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="control-group" id="container-data">
+        <div id="row">
+            <div id="row-heading">
+                <a id="content" href="{{ url_for('login') }}">Logged Out Successfully, please login again.</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

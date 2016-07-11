@@ -109,20 +109,6 @@ button {
     padding-top:5px;
     }
 
-.question{
-    font-size: 25px;
-    color: white;
-    margin-top: 3%;
-    font-family: 'Droid Sans', sans-serif;
-    }
-
-.checkbox{
-    font-size: 25px;
-    color: white;
-    margin-top: 1%;
-    font-family: 'Droid Sans', sans-serif;
-    }
-
 #submit-box {
     padding-bottom:20px;
     }
@@ -133,4 +119,3 @@ button {
     }
 
 }
-

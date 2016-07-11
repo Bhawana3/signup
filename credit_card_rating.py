@@ -67,17 +67,17 @@ def signUp():
             # for finding last inserted user_id
             print cursor.lastrowid
 
-            user_id = cursor.lastrowid
+            uid = cursor.lastrowid
 
             # storing user_id in session
-            session['uid'] = user_id
+            session['uid'] = uid
             session['user_response'] = user_response_for_yes_answers
 
             # inserting question numbers into user prefernce table
 
             for question_number in user_response_for_yes_answers:
                 insert_into_user_preference = "INSERT INTO user_preference(user_id,QuesNo) VALUES(%s,%s)"
-                cursor.execute(insert_into_user_preference,(user_id,question_number))
+                cursor.execute(insert_into_user_preference,(uid,question_number))
                 conn.commit()
             conn.close()
 
@@ -92,14 +92,95 @@ def signUp():
         flash("email already exists!!")
         return render_template('signup.html')
 
+@app.route('/login',methods=['GET','POST'])
+def login():
+    if request.method == 'GET':
+        try:
+            print "Session variable is:",session
+            if ('uid' in session) and ('user_response' in session):
+                print "User:",session['uid']," is already logged in. Redirecting to home page"
+                user_response = session['user_response']
+                print "user_response : ",user_response
+                return redirect(url_for('home'))
+            else:
+                return render_template('login.html')
+        except Exception as e:
+            print "Error occurred:",e
+
+    elif request.method == 'POST':
+        if 'uid' in session:
+            print "User:",session['uid']," is already logged in. Redirecting to home page"
+            return redirect(url_for('home'))
+        else:
+            _email = request.form.get('email',None)
+            _password = request.form.get('password',None)
+
+            try:
+                conn = mysql.connect()
+                cursor = conn.cursor()
+                print str(_email)
+                query = "SELECT userId,password FROM user WHERE email_id = '" + str(_email) + "'"
+                cursor.execute(query)
+                data = cursor.fetchone()
+                conn.commit()
+
+            except Exception as e:
+                print "Error in database : ",e
+
+            if len(data) > 0:
+                uid = data[0]
+                password = data[1]
+
+                try:
+                    #verify password hash
+                    if sha256_crypt.verify(request.form.get('password',None),password):
+                        session['logged_in'] = True
+                        # User credentials are correct
+
+                        # Delete old values from session
+                        print "Logging out any user if he's already logged-in."
+                        session.clear()
+
+                        try:
+                            conn = mysql.connect()
+                            cursor = conn.cursor()
+                            sql_query_for_user_preference = "SELECT * FROM user_preference WHERE user_id = %s" % str(uid)
+                            cursor.execute(sql_query_for_user_preference)
+                            user_preference = cursor.fetchall()
+                            conn.commit()
+                            conn.close()
+                            print user_preference
+
+                        except Exception as e:
+                            print "Error in database query : ",e
+
+                        # Log the user in.
+                        session['uid'] = uid
+                        session['user_response'] = user_preference
+                        print "User:",uid,"successfully logged-in. Redirecting to profile page."
+
+                        return redirect(url_for('home'))
+
+                    else:
+                        flash('Invalid credentials, try again.')
+                        return render_template('login.html')
+
+                except Exception as e:
+                    print "error : ",e
+                    flash('Invalid credentials, try again.')
+                    return render_template('login.html')
+            else:
+                flash('Please enter a valid email address')
+                return render_template('login.html')
+
 @app.route('/home')
 def home():
     try:
-        user_response = session['user_response']                # user reponse is a list containing answers
+        user_response = session['user_response']                # user response is a list containing answers
         conn = mysql.connect()
         cursor = conn.cursor()
-        answers_tuple = tuple(user_response)                 # converting user response into tuple
-        query = "SELECT cc.card_name ,Sum(qc.Points) AS sum FROM questions_for_credit_cards AS qc INNER JOIN credit_card AS cc ON cc.CID = qc.CardNo WHERE QuesNo in " + str(answers_tuple) + "GROUP BY cc.CId,cc.card_name ORDER BY sum DESC;"
+        answers_tuple = tuple(user_response)                    # converting user response into tuple
+        query = "SELECT cc.card_name,cc.image,Sum(qc.Points) AS sum FROM questions_for_credit_cards AS qc INNER JOIN credit_card AS cc ON cc.CID = qc.CardNo WHERE QuesNo in " + str(answers_tuple) + "GROUP BY cc.CId,cc.card_name ORDER BY sum DESC;"
         cursor.execute(query)
         results = cursor.fetchall()
         conn.commit()
@@ -109,6 +190,11 @@ def home():
     except Exception as e:
         print "Error :",e
 
+@app.route('/logout',methods=['GET'])
+def logout():
+    session.clear()
+    print 'deleted session: ', session
+    return render_template('logout.html')
 
 if __name__ == "__main__":
     app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'

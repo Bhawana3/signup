@@ -4,10 +4,19 @@
     <meta charset="UTF-8">
     <title>Sign Up</title>
     <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='signup.css') }}">
+    <link href='https://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <div id="container">
     <div class="control-group" id="container-form">
+        <div class="nav-bar">
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li><a href="{{ url_for('home') }}" style="cursor:pointer;">Home</a></li>
+                    <li><a href="{{ url_for('login') }}" style="cursor:pointer;">LogIn</a></li>
+                </ul>
+            </div>
+        </div>
         <div id="row" >
             <div id="row-heading">Know best suited credit card for you</div>
         </div>
