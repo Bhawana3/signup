@@ -44,3 +44,10 @@ li a {
     margin-top: 60px;
     }
 
+#row-heading a{
+    text-decoration: none;
+    color: #453F3F;
+    font-family: sans-serif;
+    font-size: 30px;
+    }
+}

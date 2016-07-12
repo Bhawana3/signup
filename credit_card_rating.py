@@ -135,7 +135,7 @@ def login():
                 conn.commit()
 
             except Exception as e:
-                print "Error in database : ",e
+                print "Error in database query: ",e
 
             if len(data) > 0:
                 uid = data[0]
@@ -189,8 +189,13 @@ def home():
         user_response = session['user_response']                # user response is a list containing answers
         conn = mysql.connect()
         cursor = conn.cursor()
-        answers_tuple = tuple(user_response)                    # converting user response into tuple
-        query = "SELECT cc.CId,cc.card_name,cc.image,cc.detail,Sum(qc.Points) AS sum FROM questions_for_credit_cards AS qc INNER JOIN credit_card AS cc ON cc.CID = qc.CardNo WHERE QuesNo in " + str(answers_tuple) + "GROUP BY cc.CId,cc.card_name ORDER BY sum DESC;"
+        if user_response != []:
+            answers_tuple = tuple(user_response)                    # converting user response into tuple
+            print answers_tuple
+            query = "SELECT cc.CId,cc.card_name,cc.image,cc.detail,Sum(qc.Points) AS sum FROM questions_for_credit_cards AS qc INNER JOIN credit_card AS cc ON cc.CID = qc.CardNo WHERE QuesNo in " + str(answers_tuple) + "GROUP BY cc.CId,cc.card_name ORDER BY sum DESC;"
+        else:
+            print user_response
+            query = "SELECT cc.CId,cc.card_name,cc.image,cc.detail,Sum(qc.Points) AS sum FROM questions_for_credit_cards AS qc INNER JOIN credit_card AS cc ON cc.CID = qc.CardNo GROUP BY cc.CId,cc.card_name ORDER BY sum DESC;"
         cursor.execute(query)
         results = cursor.fetchall()
         conn.commit()

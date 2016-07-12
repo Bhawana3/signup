@@ -38,6 +38,10 @@ li a {
     color:#ECABB0;
      }
 
+img#Img {
+    filter:opacity(30%);
+}
+
 
 .background-image{
     position: relative;
@@ -58,7 +62,7 @@ h1{
         left: 44%;
         text-decoration: none;
         font-size: 45px;
-        font-family: cursive;
+        font-family: sans;
         color: aliceblue;
         font-weight: 600;
 
