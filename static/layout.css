@@ -1,0 +1,66 @@
+@media screen and (max-width: 2500px){
+#container {
+    background-color: white;
+    width:100%;
+    min-height:700px;
+    margin: 0 auto;
+    border: solid 1px;
+    border-color: whitesmoke;
+    }
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 50px;
+    overflow: hidden;
+    background-color: #30BEBE;
+    border-bottom: solid 1px;
+    border-color: transparent;
+}
+
+li {
+    float: right;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-size: 17px;
+    width:61px;
+}
+
+.active {
+    color:#ECABB0;
+     }
+
+
+.background-image{
+    position: relative;
+}
+
+h1{
+    position: absolute;
+    top: 332px;
+    left: 32%;
+    padding: 1%;
+    color: white;
+    font-family: sans-serif;
+    }
+
+#sign-up{
+        position: absolute;
+        top: 282px;
+        left: 44%;
+        text-decoration: none;
+        font-size: 45px;
+        font-family: cursive;
+        color: aliceblue;
+        font-weight: 600;
+
+        }
+

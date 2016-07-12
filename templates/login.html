@@ -9,7 +9,7 @@
             var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             if (re.test(email.value) == false)
             {
-                alert('Invalid Email Address');
+                alert('Please provide a valid Email Address');
                 return false;
             }
             return true;
@@ -27,7 +27,7 @@
         </div>
     </div>
     <div class="control-group" id="container-form" style="width: 47%;margin-left: 26%;background-color: white;">
-        <form action="/login" method="POST" class="form-horizontal" style="text-align:center">
+        <form action="/login" method="POST" class="form-horizontal" style="text-align:center;box-shadow: 5px 4px 23px 0px rgb(48, 190, 190);">
             <div id="row">
                 <div id="row-heading"> Login </div>
             </div>

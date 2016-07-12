@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Credit Card Rating</title>
+    <link href="{{ url_for('static',filename='layout.css') }}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div>
+    <div class="container">
+        <div class="header">
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li><a href="{{ url_for('signUp') }}" style="cursor:pointer;width: 70px">Sign Up</a></li>
+                    <li><a href="{{ url_for('login') }}" style="cursor:pointer">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-box">
+        <img class="background-image" src="{{ url_for('static',filename= 'images/background1.jpg' ) }}" alt="background" width="100%">
+        <h1>to know best credit card for you</h1>
+        <div class="signup-button">
+            <a class="btn btn-lg btn-success" id="sign-up" role="button" href="signup">Sign up</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

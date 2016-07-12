@@ -17,6 +17,16 @@ try:
 except Exception as e:
     print "Error : ",e
 
+@app.route('/')
+def layout():
+    try:
+        if ('uid' in session) and ('user_response' in session):
+            print "User:",session['uid']," is already logged in. Redirecting to home page"
+            return redirect(url_for('home'))
+        else:
+            return render_template('layout.html')
+    except Exception as e:
+        print "Error : ",e
 
 @app.route('/signup',methods=['GET'])
 def load_questions():
@@ -157,7 +167,7 @@ def login():
                         # Log the user in.
                         session['uid'] = uid
                         session['user_response'] = user_preference
-                        print "User:",uid,"successfully logged-in. Redirecting to profile page."
+                        print "User:",uid,"successfully logged-in. Redirecting to home page."
 
                         return redirect(url_for('home'))
 
@@ -180,7 +190,7 @@ def home():
         conn = mysql.connect()
         cursor = conn.cursor()
         answers_tuple = tuple(user_response)                    # converting user response into tuple
-        query = "SELECT cc.card_name,cc.image,Sum(qc.Points) AS sum FROM questions_for_credit_cards AS qc INNER JOIN credit_card AS cc ON cc.CID = qc.CardNo WHERE QuesNo in " + str(answers_tuple) + "GROUP BY cc.CId,cc.card_name ORDER BY sum DESC;"
+        query = "SELECT cc.CId,cc.card_name,cc.image,cc.detail,Sum(qc.Points) AS sum FROM questions_for_credit_cards AS qc INNER JOIN credit_card AS cc ON cc.CID = qc.CardNo WHERE QuesNo in " + str(answers_tuple) + "GROUP BY cc.CId,cc.card_name ORDER BY sum DESC;"
         cursor.execute(query)
         results = cursor.fetchall()
         conn.commit()
