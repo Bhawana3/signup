@@ -3,6 +3,8 @@ CREATE DATABASE credit_card_ranking :
 CREATE TABLE `credit_card` (
   `CId` int(11) NOT NULL AUTO_INCREMENT,
   `card_name` varchar(200) DEFAULT NULL,
+  `image` varchar(200) NOT NULL,
+  `detail` varchar(500) NOT NULL,
   PRIMARY KEY (`CId`)
 );
 
