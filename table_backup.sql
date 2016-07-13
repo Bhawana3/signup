@@ -25,6 +25,8 @@ DROP TABLE IF EXISTS `credit_card`;
 CREATE TABLE `credit_card` (
   `CId` int(11) NOT NULL AUTO_INCREMENT,
   `card_name` varchar(200) DEFAULT NULL,
+  `image` varchar(200) NOT NULL,
+  `detail` varchar(500) NOT NULL,
   PRIMARY KEY (`CId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -35,7 +37,7 @@ CREATE TABLE `credit_card` (
 
 LOCK TABLES `credit_card` WRITE;
 /*!40000 ALTER TABLE `credit_card` DISABLE KEYS */;
-INSERT INTO `credit_card` VALUES (1,'Citibank Rewards Card'),(2,'ICICI Bank Coral Credit Card'),(3,'HDFC Bank Platinum plus credit card'),(4,'Axis Bank Infinite Credit Card'),(5,'SBI Gold Credit Card'),(6,'Standard Chartered Platinum Rewards Credit Card'),(7,'American Express payback credit card'),(8,'HSBC Platinum Credit card'),(9,'IndusInd Gold Credit Card'),(10,'Kotak Mahindra Essentia platinum credit card');
+INSERT INTO `credit_card` VALUES (1,'Citibank Rewards Card','images/citi.png','Cardholders can earn 10 reward points upon spending Rs.125 at 50 plus partner stores.Customers can earn reward points at the rate of 1 point for every Rs.125 on all other purchases.Reward points can be redeemed at over 700 outlets and e-shopping partners.Upon card activation, cardholders can get 2,500 points.'),(2,'ICICI Bank Coral Credit Card','images/icici.jpg','You pay a Joining Fee of Rs.1,000 + service tax and get a complimentary tie worth Rs.999 from Provogue.2x cash rewards at supermarkets, on groceries and dining.Buy one get one free movie ticket offer on Bookmyshow. Avail up to 2 tickets per month up to the value of Rs. 250 per ticket.2 complimentary domestic airport lounge visits every quarter.Culinary Treats program offers a minimum 15% savings on dining bills at over 800 restaurants across India.'),(3,'HDFC Bank Platinum plus credit card','images/hdfc.jpg','This card has zero joining fees and annual fees of Rs.299.You get 50% more reward points when you spend more than Rs.50,000 in a statement cycle. Some of the benefits include incremental reward points, 0% fuel surcharge and lower interest rate on revolving your credit facility.'),(4,'Axis Bank Infinite Credit Card','images/axis.png','It is famous for its lowest interest rate, zero joining as well as annual fees and 0% fuel surcharge for transactions between Rs.400 to Rs.4000. It offers 25% cash back on movie ticket purchase (up to Rs.1000 in a year) and double the rewards when you spend internationally.'),(5,'SBI Gold Credit Card','images/sbi.png','The joining and the annual fee on this card are Rs.299, and you can earn 1 point for every Rs.100 you spend and 10 Cash Points for every Rs.100 spent on Departmental Store & Grocery Spends through your credit card.'),(6,'Standard Chartered Platinum Rewards Credit Card','images/standard.png','This card has a joining fee of Rs.399 which is waived off when you apply for a credit card online. You get bonus rewards after first 5 transactions And each time you shop with your card at participating partners.'),(7,'American Express payback credit card','images/american.png','You can earn 3 PAYBACK Points for every Rs.100 spent.Spend at listed merchants in their listed categories(grocery, restaurants, fuel etc.) every month, and get a complimentary movie voucher for two worth Rs. 700, every month.'),(8,'HSBC Platinum Credit card','images/hsbc.png','This card also has zero joining and annual fee. It comes with 0% fuel surcharge and you can Earn 2 Reward points for every Rs.150 spent.'),(9,'IndusInd Gold Credit Card','images/indusind.png','You get a chance to choose the savings plan that matches your lifestyle and spend patterns. It offers 4 different plans which include shop plan, home plan, travel plan and party plan. Under Gold Home plan, for every Rs 100 spent, you can earn 4 savings points for grocery shopping, 2.5 points for Cellphone & electricity bills, 1.5 for insurance premium & medical bills and 0.5 points for all other spends.'),(10,'Kotak Mahindra Essentia platinum credit card','images/kotak.jpg','This credit card has a joining fee of Rs.1499 and an annual fee of Rs.749, but it gives you 10 Saving Points for Rs.100 you spend at Departmental & Grocery Stores  wherein 1 Saving Point = Re.1 with the condition that the Minimum transaction size should be Rs. 1500 & Maximum Rs. 4000. Maximum Saving Points for a month can be 500. You can earn 1 Saving Point for Rs. 250 you spend on other categories and redeem for cash and against Airline tickets/ Merchandise/ Mobile recharge.');
 /*!40000 ALTER TABLE `credit_card` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,7 +61,7 @@ CREATE TABLE `question_table` (
 
 LOCK TABLES `question_table` WRITE;
 /*!40000 ALTER TABLE `question_table` DISABLE KEYS */;
-INSERT INTO `question_table` VALUES (1,'Is your age less than 25?'),(2,'Do you want your credit card to have some minimum transaction balance required per month?'),(3,'Do you want to pay any joining fee for Credit Card?'),(4,'Do you want to use your credit card for daily purpose i.e paying electricity bills,fuel, buying groceries etc?'),(5,'Do you want to use your credit card for shopping/travelling/movie tickets etc?');
+INSERT INTO `question_table` VALUES (1,'Is your age less than 25?'),(2,'Is your salary more than 6 lakh per annum?'),(3,'Do you already have an existing credit card?'),(4,'Do you want to use your credit card for daily purpose i.e paying electricity bills,fuel, buying groceries etc?'),(5,'Do you want to use your credit card for shopping/travelling/movie tickets etc?');
 /*!40000 ALTER TABLE `question_table` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -102,4 +104,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-07-09 11:10:38
+-- Dump completed on 2016-07-13 19:08:27

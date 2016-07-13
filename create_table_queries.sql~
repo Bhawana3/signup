@@ -33,7 +33,7 @@ CREATE TABLE `questions_for_credit_cards` (
   CONSTRAINT `questions_for_credit_cards_ibfk_2` FOREIGN KEY (`QuesNo`) REFERENCES `question_table` (`QId`)
 );
 
-CREATE TABLE `user_preference` (
+:CREATE TABLE `user_preference` (
   `user_id` int(11) NOT NULL,
   `QuesNo` int(11) NOT NULL,
   UNIQUE KEY `card_quest_combination` (`user_id`,`QuesNo`),
