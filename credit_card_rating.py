@@ -137,7 +137,12 @@ def login():
             except Exception as e:
                 print "Error in database query: ",e
 
-            if len(data) > 0:
+	    if data == None:
+                flash('Please enter a valid email address')
+                return render_template('login.html')
+		
+
+            elif len(data) > 0:
                 uid = data[0]
                 password = data[1]
 
@@ -187,6 +192,7 @@ def login():
 def home():
     try:
         user_response = session['user_response']                # user response is a list containing answers
+	user_response = map(int,user_response)
         conn = mysql.connect()
         cursor = conn.cursor()
         if user_response != []:
